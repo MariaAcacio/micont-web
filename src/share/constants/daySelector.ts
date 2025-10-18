@@ -1,0 +1,41 @@
+import { DAYS_OF_THE_WEEK } from '../enums/formEnums';
+
+export const daysOfTheWeek: { day: DAYS_OF_THE_WEEK; label: string }[] = [
+  { day: DAYS_OF_THE_WEEK.MONDAY, label: 'Monday' },
+  { day: DAYS_OF_THE_WEEK.TUESDAY, label: 'Tuesday' },
+  { day: DAYS_OF_THE_WEEK.WEDNESDAY, label: 'Wednesday' },
+  { day: DAYS_OF_THE_WEEK.THURSDAY, label: 'Thursday' },
+  { day: DAYS_OF_THE_WEEK.FRIDAY, label: 'Friday' },
+  { day: DAYS_OF_THE_WEEK.SATURDAY, label: 'Saturday' },
+  { day: DAYS_OF_THE_WEEK.SUNDAY, label: 'Sunday' },
+  { day: DAYS_OF_THE_WEEK.MONDAY_TO_FRIDAY, label: 'Monday to Friday' },
+  { day: DAYS_OF_THE_WEEK.MONDAY_TO_SATURDAY, label: 'Monday to Saturday' },
+  { day: DAYS_OF_THE_WEEK.MONDAY_TO_SUNDAY, label: 'Monday to Sunday' },
+];
+
+export const timeOfTheDay: { time: string; label: string }[] = [
+  { time: '00:00', label: '12:00 AM' },
+  { time: '01:00', label: '1:00 AM' },
+  { time: '02:00', label: '2:00 AM' },
+  { time: '03:00', label: '3:00 AM' },
+  { time: '04:00', label: '4:00 AM' },
+  { time: '05:00', label: '5:00 AM' },
+  { time: '06:00', label: '6:00 AM' },
+  { time: '07:00', label: '7:00 AM' },
+  { time: '08:00', label: '8:00 AM' },
+  { time: '09:00', label: '9:00 AM' },
+  { time: '10:00', label: '10:00 AM' },
+  { time: '11:00', label: '11:00 AM' },
+  { time: '12:00', label: '12:00 PM' },
+  { time: '13:00', label: '1:00 PM' },
+  { time: '14:00', label: '2:00 PM' },
+  { time: '15:00', label: '3:00 PM' },
+  { time: '16:00', label: '4:00 PM' },
+  { time: '17:00', label: '5:00 PM' },
+  { time: '18:00', label: '6:00 PM' },
+  { time: '19:00', label: '7:00 PM' },
+  { time: '20:00', label: '8:00 PM' },
+  { time: '21:00', label: '9:00 PM' },
+  { time: '22:00', label: '10:00 PM' },
+  { time: '23:00', label: '11:00 PM' },
+];
