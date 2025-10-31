@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
+import { ModalProvider } from '@/components/modal/ModalProvider';
+import { Modal } from '@/components/modal/Modal';
 
 export const metadata: Metadata = {
   title: 'MiCont',
@@ -14,7 +16,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="antialiased" suppressHydrationWarning>
-        {children}
+        <ModalProvider>
+          {children}
+          <Modal />
+        </ModalProvider>
       </body>
     </html>
   );
