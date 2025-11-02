@@ -1,4 +1,5 @@
 import { daysOfTheWeek } from '@/share/constants/daySelector';
+import { MenuItem, TextField } from '@mui/material';
 
 export default function DaySelector({
   value,
@@ -9,27 +10,32 @@ export default function DaySelector({
 }) {
   return (
     <>
-      <select
-        className="border border-gray-300 rounded-md p-2 bg-white"
+      <TextField
         id="day"
-        name="Day of the week"
-        about="select the day of the week"
+        label="Choose day"
+        select
+        variant="outlined"
         value={value}
-        onChange={(event: React.ChangeEvent<HTMLSelectElement>) => {
+        onChange={event => {
           onChange(event.target.value);
         }}
+        className="border border-gray-300 rounded-md p-2 bg-white w-64"
+        SelectProps={{
+          MenuProps: {
+            PaperProps: {
+              sx: {
+                maxHeight: 150,
+              },
+            },
+          },
+        }}
       >
-        <option value="" disabled>
-          Choose the day
-        </option>
-        {daysOfTheWeek.map(day => {
-          return (
-            <option key={day.day} value={day.day}>
-              {day.label}
-            </option>
-          );
-        })}
-      </select>
+        {daysOfTheWeek.map(day => (
+          <MenuItem key={day.day} value={day.day} className="h-10">
+            {day.label}
+          </MenuItem>
+        ))}
+      </TextField>
     </>
   );
 }

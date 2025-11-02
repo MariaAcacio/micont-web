@@ -1,5 +1,6 @@
 import { timeOfTheDay } from '@/share/constants/daySelector';
 import { ScheduleSelectorProps } from '@/types/scheduleRow';
+import { MenuItem, TextField } from '@mui/material';
 
 export default function ScheduleSelector({
   slotId,
@@ -8,7 +9,7 @@ export default function ScheduleSelector({
 }: ScheduleSelectorProps) {
   function handleChange(
     slotName: string,
-    event: React.ChangeEvent<HTMLSelectElement>
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) {
     updateScheduleValues(slotId, {
       ...scheduleValues,
@@ -17,48 +18,62 @@ export default function ScheduleSelector({
   }
   return (
     <div className="flex gap-2">
-      <select
-        className="border border-gray-300 rounded-md p-2 bg-white"
-        id="start-time"
-        name="start-time"
-        about="select the time of the day"
+      <TextField
+        id="start-time-select"
+        label="From"
+        select
+        variant="outlined"
         value={scheduleValues.startTime}
-        onChange={(event: React.ChangeEvent<HTMLSelectElement>) => {
+        onChange={event => {
           handleChange('startTime', event);
         }}
-      >
-        <option value="" disabled>
-          From
-        </option>
-        {timeOfTheDay.map(hour => {
-          return (
-            <option key={hour.time} value={hour.time}>
-              {hour.label}
-            </option>
-          );
-        })}
-      </select>
-      <select
-        className="border border-gray-300 rounded-md p-2 bg-white"
-        id="end-time"
-        name="end-time"
-        about="select the time of the day"
-        value={scheduleValues.endTime}
-        onChange={(event: React.ChangeEvent<HTMLSelectElement>) => {
-          handleChange('endTime', event);
+        className="border border-gray-300 rounded-md p-2 bg-white w-32"
+        SelectProps={{
+          MenuProps: {
+            PaperProps: {
+              sx: {
+                maxHeight: 150,
+              },
+            },
+          },
         }}
       >
-        <option value="" disabled>
-          To
-        </option>
+        {timeOfTheDay.map(hour => (
+          <MenuItem key={hour.time} value={hour.time} className="h-10">
+            {hour.label}
+          </MenuItem>
+        ))}
+      </TextField>
+
+      <TextField
+        className="border border-gray-300 rounded-md p-2 bg-white w-32"
+        id="end-time"
+        name="end-time"
+        label="To"
+        select
+        variant="outlined"
+        value={scheduleValues.endTime}
+        onChange={event => {
+          handleChange('endTime', event);
+        }}
+        SelectProps={{
+          MenuProps: {
+            PaperProps: {
+              sx: {
+                maxHeight: 150,
+              },
+            },
+          },
+        }}
+      >
         {timeOfTheDay.map(hour => {
           return (
-            <option key={hour.time} value={hour.time}>
+            <MenuItem key={hour.time} value={hour.time} className="h-10">
               {hour.label}
-            </option>
+            </MenuItem>
           );
         })}
-      </select>
+      </TextField>
     </div>
   );
 }

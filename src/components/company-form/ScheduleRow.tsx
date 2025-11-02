@@ -24,63 +24,74 @@ export default function ScheduleRow({
   }
 
   return (
-    <div className="flex gap-3">
-      <DaySelector
-        value={selectedDay}
-        onChange={value =>
-          handleUpdateSelectedDay({ rowId, selectedDay: value })
-        }
-      />
-      {timeSlots.map((timeSlot, index) => {
-        const isLast = index === timeSlots.length - 1;
-        const hasMultipleSlots = timeSlots.length > 1;
+    <div className="flex gap-6 items-center flex-wrap">
+      <div className="flex-shrink-0">
+        <DaySelector
+          value={selectedDay}
+          onChange={value =>
+            handleUpdateSelectedDay({ rowId, selectedDay: value })
+          }
+        />
+      </div>
+      <div className="flex gap-2 items-center flex-wrap">
+        {timeSlots.map((timeSlot, index) => {
+          const isLast = index === timeSlots.length - 1;
+          const hasMultipleSlots = timeSlots.length > 1;
 
-        return (
-          <React.Fragment key={timeSlot.id}>
-            {index !== 0 && <span>-</span>}
-            <ScheduleSelector
-              slotId={timeSlot.id}
-              scheduleValues={timeSlot}
-              updateScheduleValues={handleUpdateScheduleValues}
-              key={timeSlot.id}
-            />
-            {hasMultipleSlots && isLast && (
-              <RoundedButton
-                icon={
-                  <MdOutlineRemove className="w-4 h-4 text-primary hover:text-primary-dark" />
-                }
-                onClick={(event: React.MouseEvent<HTMLButtonElement>) => {
-                  event.preventDefault();
-                  handleUpdateTimeSlots({
-                    rowId,
-                    timeSlots: timeSlots.slice(0, -1),
-                  });
-                }}
-              />
-            )}
-          </React.Fragment>
-        );
-      })}
-
-      <RoundedButton
-        onClick={(event: React.MouseEvent<HTMLButtonElement>) => {
-          event.preventDefault();
-          handleUpdateTimeSlots({
-            rowId,
-            timeSlots: [
-              ...timeSlots,
-              {
-                startTime: '',
-                endTime: '',
-                id: `${rowId}-${timeSlots.length}`,
-              },
-            ],
-          });
-        }}
-        icon={
-          <FaPlus className="w-4 h-4 text-primary hover:text-primary-dark" />
-        }
-      />
+          return (
+            <React.Fragment key={timeSlot.id}>
+              {index !== 0 && (
+                <span className="flex-shrink-0 text-gray-400">-</span>
+              )}
+              <div className="flex-shrink-0">
+                <ScheduleSelector
+                  slotId={timeSlot.id}
+                  scheduleValues={timeSlot}
+                  updateScheduleValues={handleUpdateScheduleValues}
+                  key={timeSlot.id}
+                />
+              </div>
+              {hasMultipleSlots && isLast && (
+                <div className="flex-shrink-0">
+                  <RoundedButton
+                    icon={
+                      <MdOutlineRemove className="w-4 h-4 text-primary hover:text-primary-dark" />
+                    }
+                    onClick={(event: React.MouseEvent<HTMLButtonElement>) => {
+                      event.preventDefault();
+                      handleUpdateTimeSlots({
+                        rowId,
+                        timeSlots: timeSlots.slice(0, -1),
+                      });
+                    }}
+                  />
+                </div>
+              )}
+            </React.Fragment>
+          );
+        })}
+      </div>
+      <div className="flex-shrink-0">
+        <RoundedButton
+          onClick={(event: React.MouseEvent<HTMLButtonElement>) => {
+            event.preventDefault();
+            handleUpdateTimeSlots({
+              rowId,
+              timeSlots: [
+                ...timeSlots,
+                {
+                  startTime: '',
+                  endTime: '',
+                  id: `${rowId}-${timeSlots.length}`,
+                },
+              ],
+            });
+          }}
+          icon={
+            <FaPlus className="w-4 h-4 text-primary hover:text-primary-dark" />
+          }
+        />
+      </div>
     </div>
   );
 }
